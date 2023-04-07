@@ -1,3 +1,3 @@
 # Fullcodes
 FullCods web page
-https://finnlikecookies.github.io/fullcodes/
+https://thatfinndev.github.io/fullcodes/
