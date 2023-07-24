@@ -16,10 +16,12 @@ body {
 #unity-container {
     width: 100%;
     height: 100%;
+	background-color: #4D4D4D;
 }
 #unity-canvas {
     width: 100%;
     height: 100%;
+	background-color: #4D4D4D;
     background: {{{ BACKGROUND_COLOR }}};
 }
 #loading-cover {
@@ -102,4 +104,6 @@ body {
   }
 }
 
-
+body {
+	background-color: #4D4D4D;
+}
