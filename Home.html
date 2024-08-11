@@ -1,0 +1,103 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+layout: home
+title: Home
+center-text: Fullcodes
+permalink: /
+---
+<style>
+h1 {
+  font-size: 40px;
+}
+
+.img-right {
+  float: right;
+  border-left: 25px solid rgba(255, 255, 255,0);
+}
+.img-left {
+  float: left;
+  border-right: 25px solid rgba(255, 255, 255,0);
+}
+
+</style>
+<script>
+window.onload = function onLoad() {
+  correctViewS()
+}
+window.onresize = function onresize() {
+  correctViewS()
+}
+function correctViewS()
+{
+  if(window.innerWidth<700)
+  {
+    var palmonlys = document.getElementsByClassName("palm-only")
+    for(let element of palmonlys) { removeClass(element,"gone") };
+    var laptoponly = document.getElementsByClassName("laptop-only")
+    for(let element of laptoponly) { addClass(element,"gone") };
+  }
+  else
+  {
+    var palmonlys = document.getElementsByClassName("palm-only")
+    for(let element of palmonlys) { addClass(element,"gone")};
+    var laptoponly = document.getElementsByClassName("laptop-only")
+    for(let element of laptoponly) { removeClass(element,"gone")};
+  }
+}
+</script>
+<div class="palm-only gone">
+  <h1 class="center-text">Tubeball</h1>
+  <img class="horizontal-centered"src="assets/tubeballShowcase.jpg" width="427.35" height="226.43"><p></p>
+  <p>You have to guide the ball through the tube and avoid the obstacles and collect coins. You can buy different appearances for the tube with the coins you collected. There are even different difficulty levels! Available for Android!</p>
+  <button style="width:100%"; onclick="location.href='tubeball/'" class="general-button">Get</button>
+</div>
+<div class="clearfix laptop-only">
+  <div style="display:flex;" class="showcase">
+    <img class="img-left" src="assets/tubeballShowcase.jpg" width="427.35" height="226.43">
+      <div style="flex-direction: column;">
+      <h1>Tubeball</h1>
+      <p>You have to guide the ball through the tube and avoid the obstacles and collect coins. You can buy different appearances for the tube with the coins you collected. There are even different difficulty levels! Available for Android!</p>
+      <button style="width:100%"; onclick="location.href='tubeball/'" class="general-button">Get</button>
+    </div>
+  </div>
+</div>
+
+<p></br></br></p>
+
+<div class="palm-only gone">
+  <h1 class="center-text">Quixx</h1>
+  <img class="horizontal-centered"src="assets/quixxShowcase.jpg" width="463.77" height="208.787080078"><p></p>
+  <p>A virtual sheet and virtual dices for the game! Available for Android, iOS, Web, Mac, Linux, Windows and more!</p>
+  <button style="width:100%"; onclick="location.href='quixx/'" class="general-button">Get</button>
+</div>
+<div class="clearfix laptop-only">
+  <div style="display:flex;">
+    <div style="flex-direction: column;">
+      <h1>Quixx</h1>
+      <p>A virtual sheet and virtual dices for the game! Available for Android, iOS, Web, Mac, Linux, Windows and more!</p>
+      <button style="width:100%"; onclick="location.href='quixx/'" class="general-button">Get</button>
+    </div>
+    <img class="img-right" src="assets/quixxShowcase.jpg" width="463.77" height="208.787080078">
+  </div>
+</div>
+<p></br></br></p>
+
+
+
+<h1 class="center-text">Download our apps from different sources</h1>
+<div class="horizontal-centered">
+  <button id="getitonplaystore" onclick="location.href='https://play.google.com/store/apps/dev?id=7384544842163643174';" class="get-it-on-button">
+    <img src="assets/GetItOnPlayStore.png" style="width:222px;height:65.3889166667px;">
+  </button>
+  <button id="getitongithub" onclick="location.href='https://github.com/ThatFinnDev';" class="get-it-on-button">
+    <img src="assets/GetItOnGithub.png" style="width:222px;height:65.3889166667px;">
+  </button>
+  <button id="getitonfdroid" onclick="location.href='fdroid/';" class="get-it-on-button">
+    <img src="assets/GetItOnFDroid.png" style="width:222px;height:65.3889166667px;">
+  </button>
+  <button id="getitonsidestore" onclick="location.href='sidestore/';" class="get-it-on-button">
+    <img src="assets/GetOnSideStore.png" style="width:222px;height:65.3889166667px;">
+  </button>
+</div>
