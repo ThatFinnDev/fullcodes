@@ -97,7 +97,7 @@ jobs:
   deploy-tubeball:
     environment:
       name: tubeball-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://tubeball.fullcodes.thatfinn.dev/
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -111,7 +111,7 @@ jobs:
   deploy-quixx:
     environment:
       name: quixx-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://quixx.fullcodes.thatfinn.dev/
     runs-on: ubuntu-latest
     needs: build
     steps:
