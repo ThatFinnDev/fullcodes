@@ -1,9 +1,5 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+# This workflow builds and deploys a Jekyll site with a main domain and a subdomain.
 
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
 name: Deploy Jekyll site to Pages
 
 on:
@@ -21,37 +17,56 @@ permissions:
   id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Build job
+  # Build job for both main site and snake subdomain
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
           bundler-cache: true
           cache-version: 1 # Increment this number if you need to re-download cached gems
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-      - name: Build with Jekyll
+
+      # Build Main Site
+      - name: Build Main Site
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
-      - name: Upload artifact
+
+      # Build Snake Subdomain
+      - name: Build Snake Subdomain
+        run: bundle exec jekyll build --config _config_snake.yml -d _site_snake
+        env:
+          JEKYLL_ENV: production
+
+      # Upload Main Site Artifact
+      - name: Upload Main Site Artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
 
-  # Deployment job
+      # Upload Snake Subdomain Artifact
+      - name: Upload Snake Subdomain Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site_snake
+
+  # Deployment job for main site and subdomain
   deploy:
     environment:
       name: github-pages
