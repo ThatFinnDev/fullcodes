@@ -26,6 +26,9 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://quixx.fullcodes.thatfinn.dev" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  ThatFinnDev
 
+github:
+  repository: ThatFinnDev/fullcodes
+
 # Build settings
 theme: minima
 
