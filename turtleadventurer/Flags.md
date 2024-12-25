@@ -8,5 +8,8 @@ permalink: /turtleadventurer/flags/
 <br>**fpsCap | int**
 <br>Disables V-Sync and caps the fps to **int**
 
-<br>**allowPacks | bool**
-<br>If enabled, zip and pck files from the packs directory will be loaded
+<br>**allowMods | bool**
+<br>If enabled, mods from the mods directory will be loaded
+
+<br>**exportModTemplate | bool**
+<br>If enabled, the TestMod will be extract to the files directory. It exists, so you don't want to open the apk to retrieve the TestMod.zip
