@@ -83,7 +83,7 @@ jobs:
   deploy-main:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://fullcodes.thatfinn.dev/
     runs-on: ubuntu-latest
     needs: build
     steps:
