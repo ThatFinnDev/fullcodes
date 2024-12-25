@@ -59,23 +59,26 @@ jobs:
         env:
           JEKYLL_ENV: production
 
-      # Upload Main Site Artifact
+      # Upload Main Site Artifact with a unique name
       - name: Upload Main Site Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./_site
+          name: main-site-artifact-${{ github.run_id }}
 
-      # Upload Tubeball Subdomain Artifact
+      # Upload Tubeball Subdomain Artifact with a unique name
       - name: Upload Tubeball Subdomain Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./_site_tubeball
+          name: tubeball-site-artifact-${{ github.run_id }}
 
-      # Upload Quixx Subdomain Artifact
+      # Upload Quixx Subdomain Artifact with a unique name
       - name: Upload Quixx Subdomain Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./_site_quixx
+          name: quixx-site-artifact-${{ github.run_id }}
 
   # Deployment job for main site and subdomains
   deploy:
