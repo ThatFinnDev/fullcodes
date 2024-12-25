@@ -1,4 +1,4 @@
-# This workflow builds and deploys a Jekyll site with a main domain and a subdomain.
+# This workflow builds and deploys a Jekyll site with a main domain and two subdomains.
 
 name: Deploy Jekyll site to Pages
 
@@ -22,7 +22,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job for both main site and snake subdomain
+  # Build job for main site and subdomains
   build:
     runs-on: ubuntu-latest
     steps:
@@ -47,26 +47,37 @@ jobs:
         env:
           JEKYLL_ENV: production
 
-      # Build Snake Subdomain
-      - name: Build Snake Subdomain
-        run: bundle exec jekyll build --config _config_snake.yml -d _site_snake
+      # Build Tubeball Subdomain
+      - name: Build Tubeball Subdomain
+        run: bundle exec jekyll build --config _config_tubeball.yml -d _site_tubeball
+        env:
+          JEKYLL_ENV: production
+
+      # Build Quixx Subdomain
+      - name: Build Quixx Subdomain
+        run: bundle exec jekyll build --config _config_quixx.yml -d _site_quixx
         env:
           JEKYLL_ENV: production
 
       # Upload Main Site Artifact
       - name: Upload Main Site Artifact
-        # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./_site
 
-      # Upload Snake Subdomain Artifact
-      - name: Upload Snake Subdomain Artifact
+      # Upload Tubeball Subdomain Artifact
+      - name: Upload Tubeball Subdomain Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./_site_snake
+          path: ./_site_tubeball
 
-  # Deployment job for main site and subdomain
+      # Upload Quixx Subdomain Artifact
+      - name: Upload Quixx Subdomain Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site_quixx
+
+  # Deployment job for main site and subdomains
   deploy:
     environment:
       name: github-pages
