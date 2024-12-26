@@ -31,8 +31,8 @@ theme: minima
 
 header_pages:
 - Home.html
-- Quixx.html
-- Tubeball.html
+- https://quixx.fullcodes.thatfinn.dev/
+- https://tubeball.fullcodes.thatfinn.dev/
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
