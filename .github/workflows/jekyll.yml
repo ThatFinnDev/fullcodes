@@ -1,5 +1,9 @@
-# This workflow builds and deploys a Jekyll site with a main domain and two subdomains.
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
 
+# Sample workflow for building and deploying a Jekyll site to GitHub Pages
 name: Deploy Jekyll site to Pages
 
 on:
@@ -17,106 +21,44 @@ permissions:
   id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Build job for main site and subdomains
+  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
           bundler-cache: true
-          cache-version: 1
-
+          cache-version: 1 # Increment this number if you need to re-download cached gems
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-
-      # Build Main Site
-      - name: Build Main Site
+      - name: Build with Jekyll
+        # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
-
-      # Build Tubeball Subdomain
-      - name: Build Tubeball Subdomain
-        run: bundle exec jekyll build --config _config_tubeball.yml -d _site_tubeball
-        env:
-          JEKYLL_ENV: production
-
-      # Build Quixx Subdomain
-      - name: Build Quixx Subdomain
-        run: bundle exec jekyll build --config _config_quixx.yml -d _site_quixx
-        env:
-          JEKYLL_ENV: production
-
-      # Upload Main Site Artifact with a unique name
-      - name: Upload Main Site Artifact
+      - name: Upload artifact
+        # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./_site
-          name: github-pages
 
-      # Upload Tubeball Subdomain Artifact with a unique name
-      - name: Upload Tubeball Subdomain Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./_site_tubeball
-          name: tubeball-site-artifact-${{ github.run_id }}
-
-      # Upload Quixx Subdomain Artifact with a unique name
-      - name: Upload Quixx Subdomain Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./_site_quixx
-          name: quixx-site-artifact-${{ github.run_id }}
-
-  # Deployment job for main site
-  deploy-main:
+  # Deployment job
+  deploy:
     environment:
       name: github-pages
-      url: https://fullcodes.thatfinn.dev/
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy Main Site to GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact-name: github-pages
-
-  # Deployment job for Tubeball subdomain
-  deploy-tubeball:
-    environment:
-      name: tubeball-pages
-      url: https://tubeball.fullcodes.thatfinn.dev/
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy Tubeball Subdomain to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          artifact-name: tubeball-site-artifact-${{ github.run_id }}
-
-  # Deployment job for Quixx subdomain
-  deploy-quixx:
-    environment:
-      name: quixx-pages
-      url: https://quixx.fullcodes.thatfinn.dev/
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy Quixx Subdomain to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          artifact-name: quixx-site-artifact-${{ github.run_id }}
