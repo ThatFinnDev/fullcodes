@@ -19,7 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Fullcodes
-email: fullcodesmail@gmail.com
+email: fullcodes@thatfinn.dev
 description: >- # this means to ignore newlines until "baseurl:"
   We make the "best" quality apps/games!
 baseurl: "/" # the subpath of your site, e.g. /blog
